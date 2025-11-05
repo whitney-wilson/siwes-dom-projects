@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Whitney’s To-Do (Standalone)</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 560px; margin: 40px auto; }
+    h1 { margin-bottom: 12px; }
+    .input-row { display: flex; gap: 8px; }
+    #todo-input { flex: 1; padding: 10px; }
+    #add-button { padding: 10px 16px; cursor: pointer; }
+    #todo-list { list-style: none; padding: 0; margin-top: 16px; }
+    .todo-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid #eee; }
+    .todo-item.completed span { text-decoration: line-through; color: #888; }
+    button.small { padding: 6px 10px; font-size: 12px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Whitney’s To-Do</h1>
+
+  <div class="input-row">
+    <input id="todo-input" type="text" placeholder="Type a task…" />
+    <button id="add-button">Add Task</button>
+  </div>
+
+  <ul id="todo-list"></ul>
+
+  <script>
+    const input = document.getElementById("todo-input");
+    const addBtn = document.getElementById("add-button");
+    const list = document.getElementById("todo-list");
+
+    let todos = JSON.parse(localStorage.getItem("todos") || "[]");
+
+    function save() { localStorage.setItem("todos", JSON.stringify(todos)); }
+
+    function render() {
+      list.innerHTML = "";
+      todos.forEach((todo, i) => {
+        const li = document.createElement("li");
+        li.className = "todo-item" + (todo.done ? " completed" : "");
+
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.checked = todo.done;
+
+        const span = document.createElement("span");
+        span.textContent = todo.text;
+
+        const del = document.createElement("button");
+        del.textContent = "Delete";
+        del.className = "small";
+
+        cb.addEventListener("change", () => {
+          todos[i].done = cb.checked;
+          save(); render();
+        });
+
+        del.addEventListener("click", () => {
+          todos.splice(i, 1);
+          save(); render();
+        });
+
+        li.append(cb, span, del);
+        list.appendChild(li);
+      });
+    }
+
+    function addTask() {
+      const text = input.value.trim();
+      if (!text) return;
+      todos.push({ text, done: false });
+      input.value = "";
+      save(); render();
+    }
+
+    addBtn.addEventListener("click", addTask);
+    input.addEventListener("keydown", e => { if (e.key === "Enter") addTask(); });
+
+    render();
+  </script>
+</body>
+</html>
