@@ -30,5 +30,19 @@ Ogbu ijeoma Whitney
 SIWES Intern, Xettasoft Limited
 Supervised by Mr. Jerry Duncan
 Whitney Wilson
+
+
+
+# Weather App 
+Simple weather search built during my SIWES program (Xettasoft Limited).
+Fetches live data from OpenWeather, shows temperature, condition, icon and extras.
+
+## Features
+City search with Enter key
+Loading + friendly error messages
+Weather icons
+
+## Run
+Open "index.html" with Live Server. 
 SIWES Intern, Xettasoft Limited
 Supervised by Mr. Jerry Duncan
