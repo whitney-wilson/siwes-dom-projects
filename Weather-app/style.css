@@ -1,0 +1,37 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 30px;
+  background-color: #eef2f5;
+}
+
+.weather-container {
+  max-width: 400px;
+  margin: 0 auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+input {
+  padding: 10px;
+  width: 70%;
+  margin-right: 5px;
+}
+
+button {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.error {
+  color: red;
+}
+
+.icon { width: 72px; height: 72px; }
+#loading { margin-top: 10px; color: #555; }
